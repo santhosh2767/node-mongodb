@@ -14,6 +14,7 @@ const STATUS_MESSAGE = {
     MSG_USER_NOT_REGISTERED: "User yet to register",
     MSG_USER_NOT_FOUND : "  User not found",
     MSG_USER_FOUND : "User found",
+    MSG_USERS_FOUND : "Users found",
     MSG_USER_DELETED : "User deleted successfully",
     MSG_USER_RESTORE : "User restore successfully",
     MSG_USER_NOT_AUTH: "You are not authorized",
@@ -24,7 +25,9 @@ const STATUS_MESSAGE = {
     MSG_COMMENT_NOT_FOUND : "Comment not found",
     MSG_COMMENT_CONTENT_REQ : "Comment content required",
     MSG_POST_LIKED: "Post liked successfully",
-    MSG_POST_DISLIKED:"Post disliked successfully"
+    MSG_POST_DISLIKED:"Post disliked successfully",
+    MSG_LIKED_POST:" liked post found successfully",
+    MSG_NO_LIKED_POST:"Users Yet to like post"
 }
 
 const COLLECTIONS = {

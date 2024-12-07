@@ -1,15 +1,20 @@
-function sendErrorResponse(res, data, code) {
-  return res.status(code).json({
-    statusCode: code,
-    message: data
-  });
+function sendErrorResponse(res, msg, code) {
+    try{
+      return res.status(code).json({
+        statusCode: code,
+        message: msg
+      });
+    }catch(err){
+      console.log(err.message);
+      
+    }
+
 }
 
 
 
 function removeEmptyValues(obj) {
   for (const key in obj) {
-    console.log(obj[key]);
     if (
       obj[key] === null || 
       obj[key] === undefined || 

@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post("/register", validateUser, registerUser);
 router.post("/login", loginUser);
-router.get("/list", listUsers);
+router.get("/list",protect, listUsers);
 router.get("/profile/:id", protect, singleUser);
 router.delete("/accdelete/:id",protect,accDelete)
 // router.patch("/accrestore/:id",protect,accRestore)

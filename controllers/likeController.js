@@ -37,13 +37,27 @@ const toggleLikePost = async (req, res) => {
     }
 
     await likeDoc.save();
-
-    return sendSuccessResponse(res, responseMessage,{}, StatusCodes.OK);
+    return sendSuccessResponse(res, responseMessage, {}, StatusCodes.OK);
 
   } catch (error) {
     return sendErrorResponse(res, error.message, StatusCodes.INTERNAL_SERVER_ERROR);
   }
 };
 
-module.exports = { toggleLikePost };
+
+const toggleLikeList = async (req, res) => {
+  try {
+    const likePost = await Like.find();
+    console.log(likePost.length);
+    
+    if (!likePost || likePost.length === 0) {
+      return sendErrorResponse(res, STATUS_MESSAGE.MSG_NO_LIKED_POST, StatusCodes.NOT_FOUND)
+    }
+    sendSuccessResponse(res, STATUS_MESSAGE.MSG_LIKED_POST, likePost, StatusCodes.OK)
+
+  } catch (err) {
+    return sendErrorResponse(res, err.message, StatusCodes.INTERNAL_SERVER_ERROR)
+  }
+}
+module.exports = { toggleLikePost, toggleLikeList };
 

@@ -31,26 +31,23 @@ const loginUser = async (req, res) => {
   try {
     const user = await User.findOne({ username, password });
     if (!user) {
-      return sendErrorResponse(res, STATUS_MESSAGE.MSG_USER_NOT_REGISTERED,
-        StatusCodes.UNAUTHORIZED
-      );
+      return sendErrorResponse(res, STATUS_MESSAGE.MSG_USER_NOT_REGISTERED,StatusCodes.UNAUTHORIZED);
     }
     const token = generateToken(user._id);
-
     return sendSuccessResponse(res, STATUS_MESSAGE.MSG_LOGIN_SUCCESS, { token: token }, StatusCodes.OK);
   } catch (error) {
     return sendErrorResponse(res, error.message, StatusCodes.INTERNAL_SERVER_ERROR);
   }
 }
 
-//listUsers
+//listUsers 
 const listUsers = async (req, res) => {
   try {
-    const users = await User.find();
+    const users = await User.find().select("-password");
     if (users.length === 0) {
-      return sendErrorResponse(res, STATUS_MESSAGE.MSG_USER_NOT_REGISTERED, StatusCodes.INTERNAL_SERVER_ERROR);
+      return sendErrorResponse(res, STATUS_MESSAGE.MSG_USER_NOT_REGISTERED, StatusCodes.NO_CONTENT);
     }
-    return sendSuccessResponse(res, STATUS_MESSAGE.MSG_POST_FOUND, users, StatusCodes.OK);
+    return sendSuccessResponse(res, STATUS_MESSAGE.MSG_USERS_FOUND, users, StatusCodes.OK);
   } catch (error) {
     return sendErrorResponse(res, error.message, StatusCodes.INTERNAL_SERVER_ERROR);
   }
@@ -65,7 +62,6 @@ const singleUser = async (req, res) => {
     if (!user) {
       return sendErrorResponse(res, STATUS_MESSAGE.MSG_POST_NOT_FOUND, StatusCodes.FORBIDDEN)
     }
-
     return sendSuccessResponse(res, STATUS_MESSAGE.MSG_USER_FOUND, user, StatusCodes.OK)
   } catch (err) {
     return sendErrorResponse(res, err.message, StatusCodes.INTERNAL_SERVER_ERROR)
