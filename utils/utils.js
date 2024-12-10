@@ -8,10 +8,7 @@ function sendErrorResponse(res, msg, code) {
       console.log(err.message);
       
     }
-
 }
-
-
 
 function removeEmptyValues(obj) {
   for (const key in obj) {
